@@ -8,6 +8,9 @@ const save = document.getElementById("save")
 canvas.width = 700;
 canvas.height = 700;
 
+ctx.fillStyle = "white";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 // defualt값으로 초기화
 ctx.strokeStyle = "black"
 ctx.fillStyle = "black"
@@ -72,6 +75,21 @@ handleCanvasClick = () => {
   }
 }
 
+handleCM = (e) => {
+  // console.log(e)
+  e.preventDefault();
+}
+
+//save
+handleSaveClick = () => {
+  const image = canvas.toDataURL("image/jpeg");
+  const link = document.createElement("a");
+  link.href = image;
+  link.download = "PainJS[EXPORT]";
+  // console.log(link);
+  link.click();
+}
+
 // fillCanvas = (e) => {
 // // ctx.fillRect(e.offsetX, e.offsetY);
 // console.log(e)
@@ -83,8 +101,13 @@ if(canvas){
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
   canvas.addEventListener("click",handleCanvasClick);
+  canvas.addEventListener("contextmenu", handleCM);
 }
 
 // console.log(Array.from(colors));
 Array.from(colors).forEach(color => color.addEventListener("click",changeColor))
 fill.addEventListener("click",handleModeClick)
+
+if(save){
+  save.addEventListener("click",handleSaveClick)
+}
