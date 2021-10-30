@@ -1,7 +1,7 @@
 const canvas = document.getElementById('jsCanvas');
 const ctx = canvas.getContext('2d');
 const colors = document.getElementsByClassName('jsColor')
-// const colors = document.querySelectorAll('jsColor')
+const range = document.getElementById('jsRange')
 const fill = document.getElementById("fill")
 const save = document.getElementById("save")
 
@@ -91,6 +91,11 @@ handleSaveClick = () => {
   link.click();
 }
 
+handleRangeChange = (e) =>{
+  const size = e.target.value;
+  ctx.lineWidth = size;
+}
+
 // fillCanvas = (e) => {
 // // ctx.fillRect(e.offsetX, e.offsetY);
 // console.log(e)
@@ -105,9 +110,15 @@ if(canvas){
   canvas.addEventListener("contextmenu", handleCM);
 }
 
+if(range){
+  range.addEventListener("input",handleRangeChange);
+}
+
 // console.log(Array.from(colors));
-Array.from(colors).forEach(color => color.addEventListener("click",changeColor))
-fill.addEventListener("click",handleModeClick)
+if(colors){
+  Array.from(colors).forEach(color => color.addEventListener("click",changeColor))
+  fill.addEventListener("click",handleModeClick)
+}
 
 if(save){
   save.addEventListener("click",handleSaveClick)
