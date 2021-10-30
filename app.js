@@ -82,7 +82,8 @@ handleCM = (e) => {
 
 //save
 handleSaveClick = () => {
-  const image = canvas.toDataURL("image/jpeg");
+  // const image = canvas.toDataURL("image/jpeg"); //jpeg로 저장
+  const image = canvas.toDataURL();                //png로 저장
   const link = document.createElement("a");
   link.href = image;
   link.download = "PainJS[EXPORT]";
